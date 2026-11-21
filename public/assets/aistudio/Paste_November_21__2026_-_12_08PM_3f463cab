@@ -1,0 +1,1162 @@
+# MASTER BUILD PROMPT — BREW HOUSE
+## Premium Coffeehouse Ordering & Management Progressive Web App
+
+### 1. YOUR ROLE
+
+Act as a senior full-stack software architect, UI/UX designer, frontend engineer, backend engineer, database architect, security engineer, and PWA developer.
+
+Your task is to DESIGN, DEVELOP, TEST, and PREPARE FOR DEPLOYMENT a complete working application called **BREW HOUSE**.
+
+Do not merely generate a proposal, wireframe, mockup, or development plan.
+
+Build the actual application, implement its functionality, connect its backend, create the database migrations, test the important workflows, and document how to run and deploy it.
+
+Work directly inside the connected GitHub repository if repository access is available.
+
+If the repository already contains code, inspect it before making changes. Preserve useful existing work and do not overwrite unrelated files.
+
+---
+
+# 2. PROJECT OVERVIEW
+
+**Application name:** BREW HOUSE
+
+**Tagline:** Your Coffee. Your Way.
+
+**Business model:** An independent, privately owned café brand.
+
+**Platform:** Responsive Progressive Web Application (PWA).
+
+**Initial market:** India.
+
+**Currency:** Indian Rupee (INR).
+
+**Primary language:** English.
+
+**Design direction:** Premium coffeehouse experience inspired by the convenience and quality of leading international coffeehouse apps, including Starbucks.
+
+BREW HOUSE must have its own identity. Do not copy Starbucks logos, trademarks, branding, copyrighted layouts, or proprietary assets.
+
+### Core vision
+
+Create a digital coffeehouse where customers can:
+
+- Discover coffee and food products.
+- Browse a visually appealing menu.
+- Customize drinks.
+- Add products to their cart.
+- Select a café pickup location.
+- Choose pickup options.
+- Place orders.
+- Pay online when payment integration is configured.
+- Track preparation progress.
+- Collect loyalty points.
+- Redeem rewards.
+- View their order history.
+- Manage their profile.
+
+The application must also include:
+
+1. A customer application.
+2. A barista/staff dashboard.
+3. A café owner/admin dashboard.
+4. A shared secure backend and database.
+
+Build the initial experience for one café location while designing the database so additional locations can be supported later.
+
+Initial ordering should focus on pickup. Do not add delivery logistics unless implemented as a clearly disabled future feature.
+
+---
+
+# 3. DESIGN REFERENCE — IMPORTANT
+
+Use the attached image named:
+
+`Coffee Shop Mobile UI Kit for App Design.jpg`
+
+as the primary visual inspiration.
+
+The image contains multiple mobile café application screens.
+
+Study its layouts and use its visual direction for:
+
+- Welcome screen.
+- Sign-up and login.
+- Coffee menu.
+- Product listings.
+- Product details.
+- Drink customization.
+- Cart and checkout.
+- Confirmation screen.
+- Navigation.
+- Coffee product cards.
+
+Do not reproduce its placeholder blocks or incomplete artwork.
+
+Improve the reference into a polished, professionally designed production interface.
+
+### Visual identity
+
+Create a premium, warm, elegant coffeehouse aesthetic.
+
+Primary palette:
+
+- Espresso brown: `#241813`
+- Mocha brown: `#754D3F`
+- Caramel: `#DDA879`
+- Warm cream: `#F5EBD9`
+- White: `#FFFDF9`
+
+### Typography
+
+- Headings: Playfair Display.
+- Body text: Inter.
+- Prices: Inter SemiBold.
+- Buttons: Inter Medium.
+
+### Design principles
+
+- Mobile-first responsive design.
+- Smooth transitions and subtle animations.
+- Elegant product photography.
+- Rounded product cards.
+- Premium spacing and typography.
+- Strong visual hierarchy.
+- Accessible colour contrast.
+- Consistent icons.
+- Attractive loading skeletons.
+- Proper empty states.
+- Clear error messages.
+- Professional confirmation screens.
+
+Avoid excessive gradients, excessive shadows, neon colours, or cluttered layouts.
+
+The application must look like a real premium café business, not a generic admin template.
+
+---
+
+# 4. RECOMMENDED TECHNOLOGY STACK
+
+Use the latest stable, mutually compatible versions supported by official documentation.
+
+### Frontend
+
+- Next.js with App Router.
+- React.
+- TypeScript.
+- Tailwind CSS.
+- shadcn/ui.
+- Lucide React.
+- React Hook Form.
+- Zod.
+- Zustand for client-side cart state.
+- Sonner for notifications.
+- Recharts for analytics.
+
+### Backend
+
+- Supabase.
+- PostgreSQL.
+- Supabase Authentication.
+- Supabase Storage.
+- Supabase Realtime.
+- Next.js Route Handlers and server-side operations.
+
+### Payment system
+
+- Razorpay for Indian payment processing.
+- Razorpay test mode initially.
+- Server-side order creation.
+- Payment signature verification.
+- Webhook verification.
+
+Do not use fake payment credentials or claim that payments work without actual gateway configuration.
+
+### Deployment
+
+- GitHub for version control.
+- Vercel for hosting.
+- Supabase for database and backend.
+
+### PWA
+
+Implement:
+
+- Web app manifest.
+- Application icons.
+- Installable home-screen experience.
+- Standalone display mode.
+- Service worker.
+- Offline fallback.
+- Static asset caching.
+- Appropriate caching policies.
+- Mobile browser compatibility.
+
+Use a maintained PWA implementation compatible with the selected Next.js version.
+
+Never cache sensitive customer data, private API responses, payment information, or authenticated admin pages in a public cache.
+
+Allow offline menu browsing where safely supported, but require an active server connection for order placement and payment confirmation.
+
+---
+
+# 5. CUSTOMER APPLICATION
+
+Build all the following screens and make their functions operational.
+
+## A. Welcome screen
+
+- BREW HOUSE logo.
+- Tagline: Your Coffee. Your Way.
+- Attractive coffee photography.
+- Sign Up button.
+- Log In button.
+- Smooth introduction animation.
+
+## B. Authentication
+
+Implement:
+
+- Customer registration.
+- Customer login.
+- Email and password authentication.
+- Logout.
+- Session management.
+- Forgot password.
+- Password reset.
+- Appropriate validation.
+- Authentication error messages.
+- Protected customer routes.
+
+Use Supabase Auth.
+
+Do not allow customers to choose an administrator or employee role during registration.
+
+## C. Home screen
+
+The home screen should include:
+
+1. BREW HOUSE logo and header.
+2. Personalized greeting.
+3. Selected pickup location.
+4. Search bar.
+5. Featured coffee banner.
+6. Seasonal specials.
+7. Coffee categories.
+8. Best-selling drinks.
+9. Recommended products.
+10. Exclusive offers.
+11. Loyalty points summary.
+12. Bottom navigation.
+
+Suggested bottom navigation:
+
+Home | Menu | Rewards | Orders | Profile
+
+## D. Coffee menu
+
+Create the following categories:
+
+- Espresso.
+- Cappuccino.
+- Latte.
+- Americano.
+- Mocha.
+- Cold Coffee.
+- Iced Coffee.
+- Frappé-style drinks.
+- Tea.
+- Refreshers.
+- Bakery.
+- Snacks.
+
+Required features:
+
+- Browse categories.
+- Product search.
+- Product filtering.
+- Sorting.
+- Product availability.
+- Product images.
+- Product descriptions.
+- Prices.
+- Best-seller labels.
+- Seasonal labels.
+
+All menu data must come from the backend, not hardcoded frontend arrays.
+
+## E. Product detail screen
+
+Each product must display:
+
+- Product name.
+- Product image.
+- Description.
+- Base price.
+- Ingredients.
+- Available sizes.
+- Customization options.
+- Quantity selector.
+- Add to Cart button.
+
+## F. Drink customization
+
+Create an attractive customization interface.
+
+Options should include:
+
+**Drink temperature**
+- Hot.
+- Iced.
+
+**Size**
+- Small.
+- Medium.
+- Large.
+
+**Milk options**
+- Whole milk.
+- Skimmed milk.
+- Oat milk.
+- Almond milk.
+- Soy milk.
+
+**Sugar**
+- No sugar.
+- Less sugar.
+- Regular sugar.
+- Extra sugar.
+
+**Additional options**
+- Extra espresso shot.
+- Vanilla syrup.
+- Caramel syrup.
+- Hazelnut syrup.
+- Whipped cream.
+- Chocolate topping.
+
+The owner must be able to manage available options and their additional prices.
+
+Not all customization options should be available for every drink. Support product-specific customization rules.
+
+Automatically update the displayed price when options change.
+
+Validate selected options on the server before creating the order.
+
+## G. Cart
+
+Implement:
+
+- Add products.
+- Remove products.
+- Increase quantity.
+- Decrease quantity.
+- Edit customization.
+- Display subtotal.
+- Display discounts.
+- Display tax.
+- Display final total.
+- Apply promotional coupon.
+- Empty cart state.
+
+Persist the cart safely across refreshes.
+
+Recalculate prices on the server before checkout. Never trust totals submitted by the browser.
+
+## H. Checkout
+
+Include:
+
+- Customer details.
+- Selected café location.
+- Pickup selection.
+- Pickup instructions.
+- Order summary.
+- Coupon code.
+- Payment method.
+- Final price breakdown.
+- Place Order button.
+
+Initially support:
+
+- Pay at café / counter.
+- Online payment when Razorpay is configured.
+
+Do not mark payment as completed simply because the browser redirects to a success screen.
+
+## I. Order tracking
+
+Create an attractive live order-tracking page.
+
+Order statuses:
+
+1. Pending.
+2. Confirmed.
+3. Preparing.
+4. Ready for Pickup.
+5. Completed.
+
+Also support cancellation and payment-failed states where applicable.
+
+Show:
+
+- Order number.
+- Items.
+- Customizations.
+- Order total.
+- Selected café.
+- Order progress.
+- Status updates.
+- Pickup instructions.
+
+Use Supabase Realtime for live status updates.
+
+## J. Rewards
+
+Build a configurable loyalty system.
+
+Include:
+
+- Available points.
+- Lifetime points.
+- Points history.
+- Rewards catalogue.
+- Redeem rewards.
+- Membership levels.
+- Birthday rewards.
+- Promotional bonus points.
+
+Suggested membership levels:
+
+- Bronze.
+- Silver.
+- Gold.
+- Platinum.
+
+Allow the owner to configure earning and redemption rules.
+
+Maintain points through a transaction ledger. Do not allow the client to directly change a customer's points balance.
+
+## K. Customer profile
+
+Include:
+
+- Name.
+- Email.
+- Phone.
+- Profile details.
+- Order history.
+- Saved preferences.
+- Loyalty membership.
+- Notification preferences.
+- Logout.
+
+---
+
+# 6. BARISTA / STAFF DASHBOARD
+
+Create a dedicated staff interface.
+
+Only authorized staff members should be able to access it.
+
+### Main dashboard
+
+Display separate order sections:
+
+- New Orders.
+- Confirmed Orders.
+- Preparing.
+- Ready for Pickup.
+- Completed.
+
+Each order card should display:
+
+- Order number.
+- Customer name.
+- Items.
+- Quantity.
+- Product customization.
+- Time received.
+- Payment status.
+- Pickup details.
+
+### Staff actions
+
+- Accept order.
+- Reject order with reason.
+- Start preparation.
+- Mark as ready.
+- Confirm pickup.
+- View order details.
+
+Order updates should appear in real time.
+
+Keep payment status separate from preparation status.
+
+An unpaid order must not be treated as a successfully paid order.
+
+Implement appropriate permissions and audit logging.
+
+---
+
+# 7. OWNER / ADMIN DASHBOARD
+
+Create a premium but practical desktop-friendly admin panel.
+
+### Dashboard analytics
+
+Display:
+
+- Today's revenue.
+- Today's orders.
+- Pending orders.
+- Completed orders.
+- Average order value.
+- Top-selling products.
+- Recent orders.
+- Sales trends.
+- Low-stock alerts.
+
+Use Recharts for analytics.
+
+Only display actual database-derived information. Label demo data clearly.
+
+### Product management
+
+Allow owner/admin to:
+
+- Add products.
+- Edit products.
+- Delete or deactivate products.
+- Upload product images.
+- Set prices.
+- Set descriptions.
+- Assign categories.
+- Manage seasonal products.
+- Manage availability.
+- Configure customization options.
+
+### Category management
+
+- Create categories.
+- Edit category names.
+- Manage category images.
+- Control display order.
+- Activate or deactivate categories.
+
+### Order management
+
+- View all orders.
+- Search by order number.
+- Filter by order status.
+- Filter by date.
+- View order details.
+- Handle cancellations.
+- Review payment status.
+
+### Inventory management
+
+Create basic inventory management for:
+
+- Coffee beans.
+- Milk.
+- Sugar.
+- Syrups.
+- Chocolate.
+- Tea.
+- Bakery supplies.
+- Packaging.
+
+Support:
+
+- Current stock.
+- Low-stock warnings.
+- Manual stock adjustments.
+- Stock movement history.
+
+Design the data model to support recipes and ingredient consumption when those features are implemented.
+
+### Coupon management
+
+Allow the owner to:
+
+- Create coupon codes.
+- Set fixed discounts.
+- Set percentage discounts.
+- Set expiration dates.
+- Set minimum order values.
+- Set usage limits.
+- Activate or deactivate coupons.
+
+### Staff management
+
+Allow an authorized owner to:
+
+- Create employee accounts.
+- Assign roles.
+- Assign staff to locations.
+- Disable employee access.
+- Review staff activity.
+
+### Store settings
+
+Allow management of:
+
+- Café name.
+- Address.
+- Phone.
+- Opening hours.
+- Pickup settings.
+- Store status.
+- Currency.
+- Tax configuration.
+- Pickup instructions.
+
+Do not invent a real café address, phone number, tax rate or opening hours. Use clearly labelled editable placeholders.
+
+---
+
+# 8. DATABASE ARCHITECTURE
+
+Use Supabase PostgreSQL.
+
+Create proper SQL migration files, foreign keys, indexes, unique constraints, appropriate timestamp fields, and Row Level Security policies.
+
+Recommended tables:
+
+1. profiles
+2. stores
+3. staff_store_assignments
+4. categories
+5. products
+6. option_groups
+7. option_values
+8. product_option_groups
+9. orders
+10. order_items
+11. order_item_options
+12. payments
+13. coupons
+14. coupon_redemptions
+15. loyalty_wallets
+16. loyalty_transactions
+17. inventory_items
+18. stock_movements
+19. product_recipes
+20. notifications
+21. audit_logs
+22. app_settings
+
+### Important database requirements
+
+- Reference Supabase Auth users correctly.
+- Use UUID primary keys where appropriate.
+- Store product prices as integer paise.
+- Store order totals as integer paise.
+- Preserve price and product-name snapshots on order items.
+- Preserve selected customization snapshots.
+- Track payment status independently from order status.
+- Prevent duplicate successful payment processing.
+- Add timestamps.
+- Index frequently queried columns.
+- Keep sensitive payment credentials outside the database where possible.
+- Use database transactions for important multi-step operations.
+
+### Security and Row Level Security
+
+Implement Row Level Security on all relevant tables.
+
+Rules:
+
+- Customers may access their own profiles and orders.
+- Customers may view public, active products.
+- Customers cannot modify prices or payment states.
+- Customers cannot give themselves employee or admin roles.
+- Staff can access only the store operations they are authorized to perform.
+- Owners can manage their business data.
+- Only authorized server-side operations can execute privileged actions.
+
+Never expose the Supabase service-role key to the browser.
+
+Never put server secrets in public environment variables.
+
+---
+
+# 9. PAYMENT INTEGRATION
+
+Integrate Razorpay in test mode first.
+
+Implement:
+
+1. Server-side payment order creation.
+2. Correct currency and amount validation.
+3. Checkout integration.
+4. Signature verification.
+5. Webhook signature verification.
+6. Payment status synchronization.
+7. Failed payment handling.
+8. Duplicate callback protection.
+9. Refund-status support where applicable.
+10. Clear payment confirmation screens.
+
+Use environment variables.
+
+Required placeholders:
+
+RAZORPAY_KEY_ID
+
+RAZORPAY_KEY_SECRET
+
+RAZORPAY_WEBHOOK_SECRET
+
+Never create fake credentials.
+
+If credentials are unavailable, implement the integration interface safely and document exactly how to configure it.
+
+Do not represent a simulated payment as a real transaction.
+
+---
+
+# 10. PWA IMPLEMENTATION
+
+Make BREW HOUSE installable on supported mobile devices.
+
+Requirements:
+
+- `manifest.ts` or equivalent web manifest.
+- 192x192 application icon.
+- 512x512 application icon.
+- Theme colour.
+- Background colour.
+- Standalone display mode.
+- Appropriate start URL.
+- Service worker.
+- Install experience.
+- Offline fallback page.
+- Safe caching strategy.
+- Responsive layouts.
+- iOS-compatible metadata and icons where required.
+
+Create an attractive BREW HOUSE app icon using the café's identity.
+
+Offline capabilities should be limited to safe features such as cached static assets and previously available public menu content.
+
+Do not allow offline checkout, order confirmation or payment confirmation.
+
+---
+
+# 11. INITIAL DEMO MENU
+
+Create a realistic seed dataset for development.
+
+Use the following illustrative prices:
+
+| Product | Price |
+|---|---:|
+| Espresso | ₹120 |
+| Cappuccino | ₹180 |
+| Caffè Latte | ₹190 |
+| Caramel Latte | ₹220 |
+| Mocha | ₹230 |
+| Cold Coffee | ₹200 |
+| Iced Americano | ₹170 |
+| Chocolate Frappé | ₹250 |
+| Blueberry Muffin | ₹130 |
+| Chocolate Croissant | ₹160 |
+
+These prices are development placeholders and must be editable through the admin dashboard.
+
+Create attractive product descriptions and proper product images.
+
+Do not use broken image URLs or leave generic grey placeholder boxes in the final customer experience.
+
+---
+
+# 12. REPOSITORY ARCHITECTURE
+
+Use a clean, maintainable repository structure.
+
+Recommended structure:
+
+brew-house/
+│
+├── public/
+│   ├── icons/
+│   ├── images/
+│   └── logo/
+│
+├── src/
+│   ├── app/
+│   │   ├── (customer)/
+│   │   ├── (auth)/
+│   │   ├── staff/
+│   │   ├── admin/
+│   │   ├── api/
+│   │   ├── manifest.ts
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   │
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── navigation/
+│   │   ├── products/
+│   │   ├── cart/
+│   │   └── orders/
+│   │
+│   ├── lib/
+│   │   ├── supabase/
+│   │   ├── payments/
+│   │   ├── validations/
+│   │   └── utils/
+│   │
+│   ├── hooks/
+│   ├── stores/
+│   ├── types/
+│   └── middleware.ts
+│
+├── supabase/
+│   ├── migrations/
+│   └── seed.sql
+│
+├── docs/
+│   ├── PROJECT_SPEC.md
+│   ├── DATABASE.md
+│   ├── SECURITY.md
+│   └── DEPLOYMENT.md
+│
+├── tests/
+│
+├── .env.example
+├── .gitignore
+├── package.json
+├── README.md
+└── tsconfig.json
+
+Adapt the structure sensibly as implementation progresses.
+
+Do not create huge numbers of empty files without purpose.
+
+---
+
+# 13. USER EXPERIENCE REQUIREMENTS
+
+Every screen must be responsive.
+
+Test layouts at:
+
+- 360px mobile width.
+- 390px mobile width.
+- 430px mobile width.
+- Tablet width.
+- Desktop width.
+
+Provide:
+
+- Loading states.
+- Error states.
+- Empty states.
+- Success feedback.
+- Form validation.
+- Clear navigation.
+- Accessible keyboard interactions.
+- Appropriate focus indicators.
+- Touch-friendly controls.
+
+The app should feel fast and polished.
+
+Avoid buttons that look functional but do nothing.
+
+Every primary button must perform its advertised action.
+
+Do not leave dead navigation links.
+
+---
+
+# 14. TESTING REQUIREMENTS
+
+Use appropriate automated testing tools, such as:
+
+- Vitest for unit testing.
+- React Testing Library for component testing.
+- Playwright for end-to-end testing.
+
+Create tests for:
+
+1. Customer registration.
+2. Customer login.
+3. Product browsing.
+4. Product customization.
+5. Cart functionality.
+6. Server-side price calculations.
+7. Coupon validation.
+8. Order creation.
+9. Staff order status updates.
+10. Customer order visibility restrictions.
+11. Admin permissions.
+12. Payment verification logic.
+13. PWA manifest availability.
+
+Test security-sensitive operations.
+
+Verify that customers cannot access other customers' private orders or privileged functionality.
+
+Run:
+
+- Linting.
+- Type checking.
+- Unit tests.
+- Production build.
+- Relevant end-to-end tests.
+
+Fix errors instead of hiding or suppressing them.
+
+---
+
+# 15. DEVELOPMENT EXECUTION PLAN
+
+Implement in the following order.
+
+Do not stop after producing a plan. Start writing the code.
+
+### PHASE 1 — PROJECT FOUNDATION
+
+- Inspect the GitHub repository.
+- Initialize Next.js if necessary.
+- Configure TypeScript.
+- Configure Tailwind CSS.
+- Install dependencies.
+- Create the design system.
+- Set up responsive layouts.
+- Add the BREW HOUSE logo and icons.
+- Create the PWA foundation.
+
+Deliverable: A running premium BREW HOUSE application.
+
+### PHASE 2 — CUSTOMER EXPERIENCE
+
+- Welcome page.
+- Authentication screens.
+- Home page.
+- Search.
+- Menu.
+- Categories.
+- Product detail.
+- Drink customization.
+- Cart.
+- Profile.
+- Rewards screen layouts.
+
+Deliverable: Fully working customer-facing experience with demo data where backend setup is not yet available.
+
+### PHASE 3 — BACKEND AND DATABASE
+
+- Configure Supabase.
+- Create database migrations.
+- Configure authentication.
+- Implement Row Level Security.
+- Build product APIs.
+- Connect customer profiles.
+- Connect menu data.
+- Create seed data.
+
+Deliverable: The actual frontend connected to the database.
+
+### PHASE 4 — ORDERING
+
+- Server-validated cart.
+- Checkout.
+- Order creation.
+- Pickup flow.
+- Payment status.
+- Order tracking.
+- Realtime updates.
+
+Deliverable: Working café ordering workflow.
+
+### PHASE 5 — STAFF APPLICATION
+
+- Staff authentication.
+- New order queue.
+- Preparation workflow.
+- Ready-for-pickup workflow.
+- Order completion.
+
+Deliverable: Working barista interface.
+
+### PHASE 6 — ADMIN APPLICATION
+
+- Admin authentication and authorization.
+- Analytics.
+- Products.
+- Categories.
+- Inventory.
+- Coupons.
+- Customers.
+- Staff.
+- Store settings.
+
+Deliverable: Functional owner dashboard.
+
+### PHASE 7 — PAYMENTS AND REWARDS
+
+- Razorpay test-mode integration.
+- Webhook verification.
+- Payment reconciliation.
+- Loyalty ledger.
+- Points and redemption.
+- Membership rules.
+
+Deliverable: Integrated payment and loyalty functionality.
+
+### PHASE 8 — TESTING AND DEPLOYMENT
+
+- Security tests.
+- Responsive testing.
+- PWA testing.
+- Browser testing.
+- Build optimization.
+- GitHub documentation.
+- Vercel deployment configuration.
+- Supabase production configuration.
+
+Deliverable: A tested application prepared for production deployment.
+
+---
+
+# 16. ENVIRONMENT VARIABLES
+
+Create `.env.example` with placeholders.
+
+NEXT_PUBLIC_SUPABASE_URL=
+
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+
+SUPABASE_SERVICE_ROLE_KEY=
+
+RAZORPAY_KEY_ID=
+
+RAZORPAY_KEY_SECRET=
+
+RAZORPAY_WEBHOOK_SECRET=
+
+APP_URL=
+
+Never commit `.env.local` or actual secrets.
+
+Clearly document which variables are required for each feature.
+
+---
+
+# 17. PROJECT DOCUMENTATION
+
+Create a comprehensive README.md covering:
+
+- What BREW HOUSE is.
+- Features.
+- Technology stack.
+- Project structure.
+- Mac installation.
+- Local development.
+- Environment setup.
+- Supabase setup.
+- Database migrations.
+- Demo data setup.
+- Payment setup.
+- PWA setup.
+- Testing.
+- GitHub workflow.
+- Vercel deployment.
+- Troubleshooting.
+
+Also create:
+
+`docs/PROJECT_SPEC.md`
+
+`docs/DATABASE.md`
+
+`docs/SECURITY.md`
+
+`docs/DEPLOYMENT.md`
+
+Documentation must reflect the actual code, not planned or imaginary functionality.
+
+---
+
+# 18. IMPORTANT DEVELOPMENT RULES
+
+1. Build real functionality rather than decorative mockups.
+2. Do not stop at a homepage.
+3. Do not leave primary buttons non-functional.
+4. Do not hardcode product lists into production frontend components.
+5. Use database-backed products.
+6. Validate all important input on the server.
+7. Use proper authentication and authorization.
+8. Use secure database access policies.
+9. Do not expose private keys.
+10. Do not invent payment credentials.
+11. Do not invent real business contact details.
+12. Do not misrepresent demo functionality as live functionality.
+13. Do not overwrite existing repository work without examining it.
+14. Avoid unnecessary dependencies.
+15. Keep components reusable.
+16. Keep code organized and maintainable.
+17. Test important user workflows.
+18. Fix compilation and runtime errors.
+19. Make sure the app can run locally on a Mac.
+20. Do not claim deployment unless deployment has actually succeeded.
+
+When an external service requires credentials, complete all code that can safely be implemented without those credentials and clearly document the remaining configuration.
+
+If a feature cannot be completed because an external integration is unavailable, report it honestly and continue implementing independent features.
+
+If the entire requested scope cannot be completed in one execution, implement the most useful working milestones first and provide the exact remaining tasks. Do not pretend that unfinished functionality is complete.
+
+---
+
+# 19. FINAL ACCEPTANCE CRITERIA
+
+The BREW HOUSE project is considered ready for its first real-world pilot when:
+
+- The application starts successfully.
+- Customer authentication works.
+- Customers can view products from Supabase.
+- Product customization works.
+- Cart operations work.
+- Prices are recalculated securely.
+- Customers can create orders.
+- Staff receive orders.
+- Staff can update preparation status.
+- Customers can track their orders.
+- Owners can manage products.
+- Owners can review orders.
+- Access is protected by roles and Row Level Security.
+- Payment verification is correctly implemented when configured.
+- The PWA is installable on supported devices.
+- Major application workflows pass testing.
+- The GitHub repository contains working source code.
+- Setup and deployment instructions are documented.
+
+### FINAL TASK
+
+Start by inspecting the connected GitHub repository.
+
+Then begin PHASE 1 immediately.
+
+Build the actual BREW HOUSE application in the repository.
+
+Do not respond with another project proposal or ask me to approve every small implementation decision.
+
+Use professional engineering judgment for reasonable defaults, while keeping business-specific settings editable.
+
+At every major milestone:
+
+1. Explain what you implemented.
+2. Identify files and components created.
+3. Run relevant tests.
+4. Report what works.
+5. Identify any missing configuration.
+6. Continue with the next implementation milestone.
+
+My final goal is a premium, fully functional, installable BREW HOUSE café application that I can run on my Mac, maintain through GitHub, test with customers, and eventually deploy for a real café business.
+
+**Build BREW HOUSE. Not just a design. Not just a prototype. Build the actual application.**

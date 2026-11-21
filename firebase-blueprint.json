@@ -1,0 +1,288 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Customer profile, preferences, and loyalty wallet balance",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string", "description": "Customer display name" },
+        "email": { "type": "string", "description": "Customer email" },
+        "phone": { "type": "string", "description": "Customer phone number" },
+        "preferredStoreId": { "type": "string", "description": "Selected cafe store ID" },
+        "preferredMilk": { "type": "string", "description": "Saved default milk preference" },
+        "loyaltyPoints": { "type": "integer", "description": "Available loyalty points" },
+        "lifetimePoints": { "type": "integer", "description": "Lifetime accumulated points" },
+        "notificationsEnabled": { "type": "boolean", "description": "Order update notifications preference" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": ["userId", "displayName", "loyaltyPoints", "lifetimePoints", "notificationsEnabled", "createdAt", "updatedAt"]
+    },
+    "CartItem": {
+      "title": "CartItem",
+      "description": "Persistent customized beverage or food item in customer cart",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "imageKey": { "type": "string" },
+        "quantity": { "type": "integer" },
+        "unitPricePaise": { "type": "integer" },
+        "temperature": { "type": "string" },
+        "size": { "type": "string" },
+        "milkOption": { "type": "string" },
+        "sugarLevel": { "type": "string" },
+        "addons": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "productName", "imageKey", "quantity", "unitPricePaise", "temperature", "size", "milkOption", "sugarLevel", "addons", "createdAt", "updatedAt"]
+    },
+    "LoyaltyTransaction": {
+      "title": "LoyaltyTransaction",
+      "description": "Immutable loyalty points transaction ledger entry",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["EARN", "REDEEM", "BONUS"] },
+        "pointsDelta": { "type": "integer" },
+        "description": { "type": "string" },
+        "orderId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "type", "pointsDelta", "description", "createdAt"]
+    },
+    "StoreLocation": {
+      "title": "StoreLocation",
+      "description": "Cafe location, hours, pickup instructions, and tax configuration",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "openingHours": { "type": "string" },
+        "pickupInstructions": { "type": "string" },
+        "currencyCode": { "type": "string" },
+        "taxRateBps": { "type": "integer" },
+        "open": { "type": "boolean" },
+        "pickupEnabled": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "address", "phone", "openingHours", "currencyCode", "taxRateBps", "open", "pickupEnabled", "createdAt", "updatedAt"]
+    },
+    "MenuCategory": {
+      "title": "MenuCategory",
+      "description": "Coffeehouse menu category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "slug": { "type": "string" },
+        "displayOrder": { "type": "integer" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug", "displayOrder", "active", "createdAt", "updatedAt"]
+    },
+    "MenuProduct": {
+      "title": "MenuProduct",
+      "description": "Coffee or bakery product with customization capabilities",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "description": { "type": "string" },
+        "ingredients": { "type": "string" },
+        "basePricePaise": { "type": "integer" },
+        "imageKey": { "type": "string" },
+        "available": { "type": "boolean" },
+        "bestSeller": { "type": "boolean" },
+        "seasonal": { "type": "boolean" },
+        "allowHot": { "type": "boolean" },
+        "allowIced": { "type": "boolean" },
+        "allowMilkOptions": { "type": "boolean" },
+        "allowSugarOptions": { "type": "boolean" },
+        "allowAddons": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "categoryId", "categoryName", "description", "basePricePaise", "imageKey", "available", "bestSeller", "seasonal", "allowHot", "allowIced", "allowMilkOptions", "allowSugarOptions", "allowAddons", "createdAt", "updatedAt"]
+    },
+    "CafeOrder": {
+      "title": "CafeOrder",
+      "description": "Customer pickup order with snapshot pricing and live preparation status",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "storeId": { "type": "string" },
+        "storeName": { "type": "string" },
+        "pickupOption": { "type": "string", "enum": ["PICKUP_NOW", "SCHEDULED_15M", "SCHEDULED_30M"] },
+        "pickupInstructions": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "CONFIRMED", "PREPARING", "READY_FOR_PICKUP", "COMPLETED", "CANCELLED"] },
+        "paymentMethod": { "type": "string", "enum": ["PAY_AT_COUNTER", "ONLINE_RAZORPAY"] },
+        "paymentStatus": { "type": "string", "enum": ["UNPAID", "PAID", "FAILED", "REFUNDED"] },
+        "couponCode": { "type": "string" },
+        "subtotalPaise": { "type": "integer" },
+        "discountPaise": { "type": "integer" },
+        "taxPaise": { "type": "integer" },
+        "totalPaise": { "type": "integer" },
+        "loyaltyPointsEarned": { "type": "integer" },
+        "itemsSummary": { "type": "array" },
+        "itemCount": { "type": "integer" },
+        "cancelReason": { "type": "string" },
+        "staffNote": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderNumber", "userId", "customerName", "storeId", "storeName", "pickupOption", "status", "paymentMethod", "paymentStatus", "subtotalPaise", "discountPaise", "taxPaise", "totalPaise", "loyaltyPointsEarned", "itemsSummary", "itemCount", "createdAt", "updatedAt"]
+    },
+    "PromoCoupon": {
+      "title": "PromoCoupon",
+      "description": "Promotional discount coupon",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["FIXED", "PERCENT"] },
+        "discountValue": { "type": "integer" },
+        "minOrderPaise": { "type": "integer" },
+        "maxUses": { "type": "integer" },
+        "usedCount": { "type": "integer" },
+        "active": { "type": "boolean" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "discountType", "discountValue", "minOrderPaise", "maxUses", "usedCount", "active", "createdAt", "updatedAt"]
+    },
+    "InventoryItem": {
+      "title": "InventoryItem",
+      "description": "Cafe ingredient or packaging stock level",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "unit": { "type": "string" },
+        "currentStock": { "type": "integer" },
+        "lowStockThreshold": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "category", "unit", "currentStock", "lowStockThreshold", "createdAt", "updatedAt"]
+    },
+    "StockMovement": {
+      "title": "StockMovement",
+      "description": "Audit trail of inventory adjustments",
+      "type": "object",
+      "properties": {
+        "inventoryItemId": { "type": "string" },
+        "itemName": { "type": "string" },
+        "delta": { "type": "integer" },
+        "reason": { "type": "string" },
+        "actorUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["inventoryItemId", "itemName", "delta", "reason", "actorUid", "createdAt"]
+    },
+    "StaffMember": {
+      "title": "StaffMember",
+      "description": "Authorized barista or cafe manager",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["BARISTA", "MANAGER"] },
+        "storeId": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "email", "role", "storeId", "active", "createdAt", "updatedAt"]
+    },
+    "AdminRole": {
+      "title": "AdminRole",
+      "description": "Owner/Admin registry entry",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "AuditLogEntry": {
+      "title": "AuditLogEntry",
+      "description": "Immutable operational audit log",
+      "type": "object",
+      "properties": {
+        "actorUid": { "type": "string" },
+        "actorName": { "type": "string" },
+        "action": { "type": "string" },
+        "targetPath": { "type": "string" },
+        "details": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["actorUid", "actorName", "action", "targetPath", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Customer profile and loyalty points wallet"
+    },
+    "/users/{userId}/cart/{cartItemId}": {
+      "schema": { "$ref": "#/entities/CartItem" },
+      "description": "Customer persistent shopping cart items"
+    },
+    "/users/{userId}/loyalty_transactions/{txId}": {
+      "schema": { "$ref": "#/entities/LoyaltyTransaction" },
+      "description": "Customer loyalty points transaction ledger"
+    },
+    "/stores/{storeId}": {
+      "schema": { "$ref": "#/entities/StoreLocation" },
+      "description": "Cafe pickup locations and settings"
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/MenuCategory" },
+      "description": "Menu categories"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/MenuProduct" },
+      "description": "Menu beverages and bakery products"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/CafeOrder" },
+      "description": "Customer pickup orders observed by customer and barista queue"
+    },
+    "/coupons/{couponId}": {
+      "schema": { "$ref": "#/entities/PromoCoupon" },
+      "description": "Promotional coupon codes"
+    },
+    "/inventory_items/{itemId}": {
+      "schema": { "$ref": "#/entities/InventoryItem" },
+      "description": "Cafe stock and ingredients"
+    },
+    "/stock_movements/{movementId}": {
+      "schema": { "$ref": "#/entities/StockMovement" },
+      "description": "Inventory adjustment audit logs"
+    },
+    "/staff/{staffUid}": {
+      "schema": { "$ref": "#/entities/StaffMember" },
+      "description": "Authorized baristas and cafe managers"
+    },
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminRole" },
+      "description": "Cafe owner administrators"
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLogEntry" },
+      "description": "Staff and admin action audit logs"
+    }
+  }
+}

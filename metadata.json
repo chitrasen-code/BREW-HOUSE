@@ -1,0 +1,6 @@
+{
+  "name": "Brew House",
+  "description": "Premium coffeehouse ordering, drink customization, loyalty rewards, barista queue, and cafe management app.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
